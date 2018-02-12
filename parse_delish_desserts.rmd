@@ -1,0 +1,16 @@
+---
+title: "Delish.com Desserts Processing"
+output: html_notebook
+---
+
+First we import the data
+
+```{r}
+desserts <- read.csv("/home/michael/Documents/scraped_recipes/delish.com-recipe-details-improved.csv", stringsAsFactors = FALSE)
+desserts
+```
+
+```{r}
+specific.desserts <- desserts[which(grepl("Poke Cake", desserts$Name)), ]
+specific.desserts
+```
