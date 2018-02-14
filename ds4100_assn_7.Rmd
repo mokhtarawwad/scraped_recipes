@@ -1,0 +1,44 @@
+---
+title: "DS4100 Assignment 7"
+output: html_notebook
+---
+
+For this assignment I scraped all the dessert recipes off of delish.com.
+For a real treat, look at the Cookiedilla.
+
+```{r}
+
+setwd("/home/michael/Documents/College_Coursework/2018/spring/ds4100/assn-7/")
+desserts <- read.csv("delish.com-recipe-details.csv", stringsAsFactors = FALSE)
+desserts
+
+```
+
+Somehow import.io was unable to parse any of the Cook Time information
+So I'm just gonna remove that column
+
+```{r}
+desserts$Cook.Time <- NULL
+desserts
+
+```
+
+Then I'm gonna use Lubridate to clean up the Date Published field
+
+```{r}
+library(lubridate)
+desserts$Date.Published <- strptime(desserts$Date.Published, format="%FT%T%z")
+
+```
+
+Lastly I really want to know which recipes have Chocolate in them.
+
+```{r}
+chocoholic <- function() {
+  return(desserts[which(grepl("chocolate", desserts$Ingredients)), ])
+}
+
+chocoholic()
+
+```
+
