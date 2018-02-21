@@ -1,3 +1,12 @@
+"""
+Script for parsing HTML Recipes scraped from cooking.nytimes.com.
+To use, pass the directory path to the recipes and the URL of the
+MongoDB instance as CLIs.
+
+Written by Michael Wheeler #MikeWheelMadeIt
+
+"""
+
 import json
 import logging
 import os
@@ -6,10 +15,11 @@ import re
 from pymongo import MongoClient
 from scrapy.selector import Selector
 
-client_mongo = MongoClient('mongodb://michael:secretPassword@mike-wheeler.io/recipeInfo');
+RECIPE_DIRECTORY = sys.argv[1]
+client_mongo = MongoClient(sys.argv[2]);
 
 
-RECIPE_DIRECTORY = "./nytimes"
+
 XPATH_RECIPE_NAME = '//*[@itemprop="name"]/text()'
 XPATH_RECIPE_AUTHOR = '//*[@itemprop="author"]/text()'
 XPATH_RECIPE_YIELD = '//*[@itemprop="recipeYield"]/text()'
